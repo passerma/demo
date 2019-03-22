@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="ch">
+<head>
+    <meta charset="UTF-8">
+    <meta name="keywords" content="HTML5audio插件" >
+    <meta name="description" content="HTML5audio插件">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="shortcut icon" type="images/x-icon" href="tittle.png">
+    <title>HTML5audio插件</title>
+    <script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js">
+    </script>
+    <link rel="stylesheet" href="css/base.css?version=19.3.22.1">
+</head>
+<body>
+    <div id="audio" class="audio audio-off audio-html">
+        <audio id="audio-my" src="soures/王大毛-去年夏天.mp3" preload="metadata"></audio>
+        <div class="audio-head">
+            <div class="audio-head-tittle">
+                <div class="audio-head-tittle-text audio-head-tittle-text-off"></div>
+            </div>
+            <div class="audio-head-tittle-by"></div>
+        </div>
+        <div class="add"></div>
+        <div class="min-time"></div>
+        <div class="audio-img">
+            <canvas id="audio-img-canvas" width="200px" height="200px"></canvas>
+            <div class="audio-img-cover audio-img-cover-off"></div>
+            <canvas id="audio-img-canvas-play" class="audio-img-canvas-play-off" width="45px" height="200px"></canvas>
+        </div>
+        <div class="audio-text"></div>
+        <div class="audio-by">
+            <div class="audio-by-all">
+                <span class="audio-by-now"></span>
+            </div>
+            <div class="audio-by-text">
+                <span class="audio-by-text-now">00:00</span>
+                <span class="audio-by-text-all">00:00</span>
+            </div>
+        </div>
+        <div class="audio-btn">
+            <div class="audio-btn-list audio-btn-list-off"></div>
+            <div class="audio-btn-before"></div>
+            <div class="audio-btn-play audio-btn-play-off audio-btn-play-off-a"></div>
+            <div class="audio-btn-sound"></div>
+            <div class="audio-btn-next"></div>
+        </div>
+        <div class="audio-sound">
+            <div class="audio-sound-all">
+                <span class="audio-sound-now"></span>
+                <span class="audio-sound-art"></span>
+            </div>
+        </div>
+    </div>
+    <a class="audio-head-tittle-text-out"></a>
+    <a class="audio-head-tittle-text-out-a"></a>
+    <div class="wrap">
+        <a href='https://www.azoth.club' target="_blank" class="web-font">Powered by Passerma</a>
+        <a href="https://github.com/passerma" target="_blank" class="web-font">GitHub: passerma</a>
+    </div>
+    <script src="JavaScript/base.js?version=19.3.11.2" type="text/javascript"></script>
+</body>
+</html>

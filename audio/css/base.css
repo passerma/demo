@@ -1,0 +1,358 @@
+*{
+    border: none;
+    margin: 0;
+    padding: 0;
+    font-family: 微软雅黑;
+}
+ul, ol{
+    list-style: none;
+}
+a{
+    text-decoration: none;
+}
+.audio{
+    position: relative;
+    margin: auto;
+    height: 445px;
+    top: 80px;
+    width: 300px;
+    overflow: hidden;
+    border-radius: 20px;
+    opacity: 1;
+    transition: all .5s;
+    background: linear-gradient(rgba(144, 54, 124, 0.5) 0, rgba(241, 152, 156, 0.5) 445px);
+}
+.audio-off{
+    height: 50px;
+    width: 250px;
+    border-radius: 10px;
+}
+.audio-head{
+    position: absolute;
+    margin: auto;
+    width: 100%;
+    height: 50px;
+}
+.add{
+    position: relative;
+    width: 80%;
+    height: 50px;
+}
+.min-time{
+    position: absolute;
+    width: 0;
+    opacity: 1;
+    height: 4px;
+    margin-top: -4px;
+    background: rgba(244, 234, 255, 0.4);
+    transition: all .5s;
+}
+.min-time-off{
+    width: 0;
+    opacity: 0;
+}
+.audio-head-tittle{
+    height: 100%;
+    line-height: 50px;
+    color: aquamarine;
+    font-size: 23px;
+    font-weight: bold;
+    text-align: center;
+    transition: all .5s;
+}
+.audio-head-tittle-text{
+    width: 90%;
+    margin-left: 5%;
+    text-overflow: clip;
+    word-break:keep-all;
+    white-space:nowrap;
+    overflow: hidden;
+}
+.audio-head-tittle-text-off{
+    width: 60%;
+    margin-left: 20%;
+}
+.audio-head-tittle-text-out{
+    font-size: 23px;
+    display: none;
+}
+.audio-head-tittle-text-out-a{
+    font-size: 20px;
+    display: none;
+}
+.audio-head-tittle-by{
+    margin: auto;
+    height: 50%;
+    line-height: 50px;
+    color: #9ffff4;
+    font-size: 15px;
+    font-weight: bold;
+    text-align: center;
+    opacity: 0;
+    transition: all .5s;
+}
+.audio-head-tittle-by-off{
+    opacity: 1;
+}
+.audio-head-tittle-off{
+    width: 100%;
+    height: 50%;
+    font-size: 20px;
+}
+.audio-img{
+    position: relative;
+    width: 100%;
+    height: 300px;
+    margin-top: -40px;
+}
+#audio-img-canvas{
+    margin: 50px 50px;
+    background: rgba(0, 0, 255, 0);
+    transition: all 1s;
+}
+.audio-img-canvas-on{
+    animation: img-cover 2.5s linear infinite .5s;
+}
+@keyframes img-cover {
+    from{transform: rotate(0)}
+    to{transform: rotate(360deg)}
+}
+.audio-img-cover{
+    position: absolute;
+    width: 90px;
+    height: 90px;
+    top: 50%;
+    left: 50%;
+    margin-top: -45px;
+    margin-left: -45px;
+    border-radius: 50%;
+    background: url("../soures/去年夏天.jpg") no-repeat center;
+    background-size: 90px 90px;
+    transition: all .5s;
+}
+.audio-img-cover-off{
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    top: 50%;
+    left: 50%;
+    margin-top: -155px;
+    margin-left: -123px;
+    background-size: 40px 40px;
+}
+#audio-img-canvas-play{
+    position: absolute;
+    background: rgba(0, 0, 255, 0);
+    left: 235px;
+    top: 40px;
+    transform-origin: top;
+    cursor: pointer;
+}
+.audio-img-canvas-play-off{
+    transition: all .5s;
+    transform: rotate(10deg);
+}
+.audio-img-canvas-play-on{
+    transition: all .5s;
+    transform: rotate(23deg);
+}
+.audio-text{
+    margin-top: -55px;
+    width: 100%;
+    position: absolute;
+    text-align: center;
+    font-size: 18px;
+    color: #f4eaff;
+}
+.audio-by{
+    position: relative;
+    margin-top: -25px;
+    width: 100%;
+    height: 50px;
+}
+.audio-by-all{
+    position: relative;
+    margin: auto;
+    width: 100%;
+    height: 7px;
+    background: rgba(255, 255, 255, 0.8);
+    cursor: pointer;
+}
+.audio-by-now{
+    display: block;
+    width: 0;
+    height: 100%;
+    transition: all .3s linear;
+    background: #bd428c;
+}
+.audio-by-text{
+    width: 100%;
+    height: 20px;
+}
+.audio-by-text-now, .audio-by-text-all{
+    display: block;
+    height: 20px;
+    line-height: 20px;
+    font-size: 15px;
+    color: white;
+}
+.audio-by-text-now{
+    float: left;
+    margin-left: 5%;
+}
+.audio-by-text-all{
+    float: right;
+    margin-right: 5%;
+}
+.audio-btn{
+    position: relative;
+    margin: auto;
+    width: 90%;
+    height: 100px;
+    margin-top: -20px;
+}
+.audio-btn-list{
+    display: inline-block;
+    float: left;
+    width: 36px;
+    height: 36px;
+    margin: 32px 4px;
+    cursor: pointer;
+    transition: all .5s;
+}
+.audio-btn-list-on{
+    background: url("../image/单曲循环.png") no-repeat center;
+    background-size: 36px 36px;
+}
+.audio-btn-list-off{
+    background: url("../image/循环.png") no-repeat center;
+    background-size: 36px 36px;
+}
+.audio-btn-before{
+    display: inline-block;
+    float: left;
+    background: url("../image/上一个，上一曲.png") no-repeat center;
+    width: 36px;
+    height: 36px;
+    background-size: 36px 36px;
+    margin: 32px 4px;
+    cursor: pointer;
+}
+.audio-btn-sound{
+    display: inline-block;
+    width: 36px;
+    height: 36px;
+    float: right;
+    background: url("../image/声音.png") no-repeat center;
+    background-size: 36px 36px;
+    margin: 32px 4px;
+    cursor: pointer;
+}
+.audio-btn-next{
+    display: inline-block;
+    width: 36px;
+    height: 36px;
+    float: right;
+    background: url("../image/下一个，下一曲.png") no-repeat center;
+    background-size: 36px 36px;
+    margin: 32px 4px;
+    cursor: pointer;
+}
+.audio-btn-play{
+    position: absolute;
+    width: 70px;
+    height: 70px;
+    top: 50%;
+    margin-top: -35px;
+    left: 50%;
+    margin-left: -35px;
+    transition: all .5s;
+    cursor: pointer;
+}
+.audio-btn-play-off{
+    background: url("../image/暂停.png") no-repeat center;
+    background-size: 70px 70px;
+}
+.audio-btn-play-on{
+    background: url("../image/播放.png") no-repeat center;
+    background-size: 70px 70px;
+}
+.audio-btn-play-off-a{
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    top: 50%;
+    margin-top: -360px;
+    left: 50%;
+    margin-left: 83px;
+    cursor: pointer;
+    background-size: 40px 40px;
+}
+.audio-sound{
+    height: 6px;
+    width: 0;
+    margin-left: 5%;
+    position: relative;
+    opacity: 0;
+    overflow: hidden;
+    transition: all .5s;
+}
+.audio-sound-on{
+    width: 90%;
+    opacity: 1;
+    overflow: visible;
+}
+.audio-sound-all{
+    position: relative;
+    margin: auto;
+    width: 100%;
+    height: 6px;
+    background: rgba(255, 255, 255, 0.5);
+    border-radius: 5px;
+    cursor: pointer;
+}
+.audio-sound-now{
+    display: block;
+    height: 100%;
+    background: rgb(244, 234, 255);
+    border-radius: 5px;
+}
+.audio-sound-art{
+    display: block;
+    position: absolute;
+    margin-top: -11px;
+    margin-left: -8px;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: rgb(244, 234, 255);
+}
+.wrap{
+    position: absolute;
+    top: 550px;
+    width: 100%;
+    font-size: 20px;
+    text-align: center;
+    color: #acacac;
+}
+.wrap a{
+    text-decoration: none;
+    display: inline-block;
+    color: #aaaaaa;
+    margin: 0 25px;
+}
+@font-face {
+    font-family: 'webfont';
+    src: url('../soures/webfont.eot');
+    src: url('../soures/webfont.eot?#iefix') format('embedded-opentype'),
+    url('../soures/webfont.woff') format('woff'),
+    url('../soures/webfont.ttf') format('truetype'),
+    url('../soures/webfont.svg#webfont') format('svg');
+}
+.web-font {
+    font-family: "webfont" !important;
+    font-size: 20px;
+    font-style: normal;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
