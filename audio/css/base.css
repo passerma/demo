@@ -33,6 +33,50 @@ a{
     width: 100%;
     height: 50px;
 }
+.audio-play-list{
+    display: block;
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    bottom: 10px;
+    margin-left: 20px;
+    background: url("../image/playlist.png") no-repeat center;
+    background-size: 30px 30px;
+    cursor: pointer;
+    z-index: 40;
+}
+.audio-play-list-off{
+    display: none;
+}
+.audio-play-list-all{
+    position: absolute;
+    width: 150px;
+    display: none;
+    background: rgba(222, 159, 255, 0.8);
+    border-radius: 10px;
+}
+.audio-play-list:hover .audio-play-list-all{
+    display: block;
+}
+.audio-play-list:hover{
+    background: none;
+    background-size: 30px 30px;
+}
+.play-list-all{
+    display: inline-block;
+    width: 100%;
+    height: 30px;
+    line-height: 30px;
+    font-size: 15px;
+    text-align: center;
+    color: #845d85;
+}
+.play-list-all-now{
+    font-size: 18px;
+    height: 32px;
+    line-height: 32px;
+    color: #f4eaff;
+}
 .add{
     position: relative;
     width: 80%;
@@ -126,7 +170,7 @@ a{
     margin-top: -45px;
     margin-left: -45px;
     border-radius: 50%;
-    background: url("../soures/去年夏天.jpg") no-repeat center;
+    background: url("../soures/忆少年.jpg") no-repeat center;
     background-size: 90px 90px;
     transition: all .5s;
 }
