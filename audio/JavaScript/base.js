@@ -24,6 +24,8 @@ $(function () {
     var audioIndex = 0;
     var audioText = new Array();
     var audioLoop = false;
+    var random = false;
+    var listClick = false;
     var outTextValue = 0;
     var audioSpeed = 1.8;
     audioText = audioName[0].split('-');
@@ -142,6 +144,10 @@ $(function () {
         if (audioIndex == -1 ){
             audioIndex = audioName.length - 1;
         }
+        if (random && !listClick){
+            audioIndex = Math.floor(Math.random()*(audioName.length));
+        }
+        listClick = !listClick;
         audioText = new Array();
         audioText = audioName[audioIndex].split('-');
         $('.audio-head-tittle-text').text(audioText[1]);
@@ -297,6 +303,19 @@ $(function () {
         }
         audioTextOut();
     }
+    function audioState() {
+        if (!audioLoop && !random){  //  随机播放
+            $('.audio-btn-list').removeClass('audio-btn-list-off').addClass('audio-btn-list-fun');
+            random = !random;
+        } else if (!audioLoop  && random) {         //  循环播放
+            $('.audio-btn-list').removeClass('audio-btn-list-fun').addClass('audio-btn-list-on');
+            audioLoop = !audioLoop;
+            random = !random;
+        } else if (audioLoop && !random) {    //  顺序播放
+            $('.audio-btn-list').removeClass('audio-btn-list-on').addClass('audio-btn-list-off');
+            audioLoop = !audioLoop;
+        }
+    }
 
     drawAudioArc();
     drawAudioPlay();
@@ -320,6 +339,7 @@ $(function () {
     });
     $('.play-list-all').on('click', function () {
         audioIndex = $(this).index();
+        listClick = !listClick;
         qiehuan();
     });
     $('#audio-img-canvas-play').on('click', function () {
@@ -340,12 +360,7 @@ $(function () {
         $('.audio-sound').toggleClass('audio-sound-on');
     });
     $('.audio-btn-list').on('click', function () {
-        if (!audioLoop){
-            $('.audio-btn-list').removeClass('audio-btn-list-off').addClass('audio-btn-list-on');
-        } else {
-            $('.audio-btn-list').removeClass('audio-btn-list-on').addClass('audio-btn-list-off');
-        }
-        audioLoop = ! audioLoop;
+        audioState();
     });
     $("#audio").hover(function() {
         audioOffAndOn();

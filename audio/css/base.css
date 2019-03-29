@@ -272,6 +272,10 @@ a{
     background: url("../image/循环.png") no-repeat center;
     background-size: 36px 36px;
 }
+.audio-btn-list-fun{
+    background: url("../image/随机.png") no-repeat center;
+    background-size: 36px 36px;
+}
 .audio-btn-before{
     display: inline-block;
     float: left;
@@ -370,33 +374,4 @@ a{
     height: 16px;
     border-radius: 50%;
     background: rgb(244, 234, 255);
-}
-.wrap{
-    position: absolute;
-    top: 550px;
-    width: 100%;
-    font-size: 20px;
-    text-align: center;
-    color: #acacac;
-}
-.wrap a{
-    text-decoration: none;
-    display: inline-block;
-    color: #aaaaaa;
-    margin: 0 25px;
-}
-@font-face {
-    font-family: 'webfont';
-    src: url('../soures/webfont.eot');
-    src: url('../soures/webfont.eot?#iefix') format('embedded-opentype'),
-    url('../soures/webfont.woff') format('woff'),
-    url('../soures/webfont.ttf') format('truetype'),
-    url('../soures/webfont.svg#webfont') format('svg');
-}
-.web-font {
-    font-family: "webfont" !important;
-    font-size: 20px;
-    font-style: normal;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
 }
