@@ -1,26 +1,12 @@
-*{
-    border: none;
-    margin: 0;
-    padding: 0;
-    font-family: 微软雅黑;
-}
-ul, ol{
-    list-style: none;
-}
-a{
-    text-decoration: none;
-}
 .audio{
     position: relative;
-    margin: auto;
     height: 445px;
-    top: 80px;
     width: 300px;
     overflow: hidden;
     border-radius: 20px;
     opacity: 1;
     transition: all .5s;
-    background: linear-gradient(rgba(144, 54, 124, 0.5) 0, rgba(241, 152, 156, 0.5) 445px);
+    background: linear-gradient(rgba(144, 54, 124, 0.5) 0, rgba(241, 152, 156, 0.7) 445px);
 }
 .audio-off{
     height: 50px;
@@ -88,7 +74,7 @@ a{
     opacity: 1;
     height: 4px;
     margin-top: -4px;
-    background: rgba(244, 234, 255, 0.4);
+    background: rgba(244, 234, 255, 0.6);
     transition: all .5s;
 }
 .min-time-off{
@@ -170,8 +156,6 @@ a{
     margin-top: -45px;
     margin-left: -45px;
     border-radius: 50%;
-    background: url("../soures/忆少年.jpg") no-repeat center;
-    background-size: 90px 90px;
     transition: all .5s;
 }
 .audio-img-cover-off{
