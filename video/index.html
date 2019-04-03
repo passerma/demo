@@ -2,15 +2,11 @@
 <html lang="ch">
 <head>
     <meta charset="UTF-8">
-    <title>HTML5网站视频播放器</title>
-    <meta name="keywords" content="HTML5视频播放插件" />
-    <meta name="description" content="HTML5视频播放插件"/>
+    <title>HTML5网站视频播放器 Power by PasserMa</title>
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="shortcut icon" type="images/x-icon" href="tittle.png">
-    <link rel="stylesheet" type="text/css" href="css/player.css?version=19.3.21.1">
-    <script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js">
-    </script>
+    <link rel="stylesheet" type="text/css" href="css/player.css">
+    <script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
 </head>
 <body>
     <header>
@@ -27,6 +23,10 @@
                     <span id="currentTime">00:00</span>
                     <span>/</span>
                     <span id="duration">00:00</span>
+                </div>
+                <div class="video-dan">
+                    <input type="text" class="video-dan-input" placeholder="点击输入弹幕,回车键发送"/>
+                    <span class="video-dan-btn">发送</span>
                 </div>
                 <div class="right-bottom">
                     <div class="bottom all"></div>
@@ -61,7 +61,7 @@
                 <div class="player-list-cotent">
                     <div class="player-list-box">
                         <div class="player-list-video video-now">星际争霸</div>
-                        <div class="player-list-video">守望先锋</div>
+                        <div class="player-list-video">EVE Online</div>
                         <div class="player-list-video">炉石传说</div>
                         <div class="player-list-video">风暴英雄</div>
                         <div class="player-list-video">暗黑破坏神</div>
@@ -75,10 +75,6 @@
         </div>
     </header>
     <footer class="footer">视频均来自暴雪游戏官网和网易游戏官网</footer>
-    <div class="wrap">
-        <a href='https://www.azoth.club' target="_blank" class="web-font">Powered by Passerma</a>
-        <a href="https://github.com/passerma" target="_blank" class="web-font">GitHub: passerma</a>
-    </div>
-    <script type="text/javascript" src="javascript/player.js?version=19.3.2.1"></script>
+    <script type="text/javascript" src="javascript/player.js"></script>
 </body>
 </html>

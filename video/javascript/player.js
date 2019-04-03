@@ -1,5 +1,5 @@
 (function($) {
-    var video = $("#my-video"); // 获取video的jq对象
+    var video = $("#my-video");
     var loop = 0;
     var qieh = 1;
     var loopture = 0;
@@ -12,11 +12,13 @@
     var videoList = $('.player-list-video').length;
     var videoProp = 0;
     var videoSpeed = 1;
-    var videoListAll = new Array('https://blz-videos.nosdn.127.net/1/StarCraft/SC2_Warchest_Season4_zhCN.mp4', 'http://flv.bn.netease.com/videolib3/1506/26/cJtFW2189/HD/cJtFW2189-mobile.mp4',
+    var videoListAll = new Array('https://blz-videos.nosdn.127.net/1/StarCraft/SC2_Warchest_Season4_zhCN.mp4', 'https://xz.v.netease.com/2018/0929/d609831f1bb5f1956c8a0e4cd30055caqt.mp4',
         'https://blz-videos.nosdn.127.net/1/HearthStone/Developer+Insights+-+Season+of+Rastakhan_CN_v2.mp4', 'https://blz-videos.nosdn.127.net/1/Heroes/HOS_ResistanceSkinsTrailer_zhCN.mp4',
         'http://flv.bn.netease.com/videolib3/1407/13/kzJvC0877/SD/kzJvC0877-mobile.mp4', 'https://blz-videos.nosdn.127.net/1/WoWx8_8.1Season2SurvivalGuide_vFINAL_zhCN.mp4',
         'https://crazynote.v.netease.com/2019/0121/1923fcb84b9d6df4dafaebde746ba607qt.mp4', 'https://n.v.netease.com/2017/1212_erce/nsh_hnc_final_info_hd.mp4',
         'https://yys.v.netease.com/2018/0917/63ec503dfa48f5196d35ebd6eb2c7761qt.mp4');
+    var danId = 0;
+
     function qiehuan(){
         video.prop("src",videoIndex);
         $('.timeBar').css('width', 0);
@@ -24,18 +26,6 @@
         $('.play-btn').removeClass('stop').addClass('play');
         $('.play-one').hide();
     }
-    $('.player-list-video').on('click', function () {
-        if (!full || !hidding){
-            videoProp = $(this).index();
-            videoIndex = videoListAll[$(this).index()];
-            for(var i =0; i < videoList; i++){
-                $('.player-list-video').eq(i).removeClass('video-now');
-            }
-            $(this).addClass('video-now');
-            qiehuan();
-            qieh = 0;
-        }
-    });
     // 读取初始时间
     function timeFormat(seconds) {
         var minite = Math.floor(seconds / 60);
@@ -193,11 +183,13 @@
                 $('.play-btn').removeClass('stop').addClass('play');
                 $('.play-one').hide();
                 playSpeed(videoSpeed);
+                $('.video-dan-all').css('animation-play-state','running');
             }
             else {
                 video[0].pause();
                 $('.play-btn').removeClass('play').addClass('stop');
                 $('.play-one').show();
+                $('.video-dan-all').css('animation-play-state','paused');
             }
     }
     //播放速度
@@ -236,6 +228,57 @@
             }
         }
     }
+
+    function danOn() {
+        var danText = $('.video-dan-input').val();
+        var zz = "^[ ]+$";               //正则判断是否全是空格
+        var isK = new RegExp(zz);
+        if (danText && !(isK.test(danText))){
+            var danIdNow = 'dan' + danId;
+            if (full){
+                var danDom = "<span class='video-dan-all video-dan-value-full' id='" + danIdNow + "'</span>";
+            } else {
+                var danDom = "<span class='video-dan-all video-dan-value' id='" + danIdNow + "'</span>";
+            }
+            $('header').prepend(danDom);
+            if(danId %3 == 1){
+                $('#' + danIdNow).css('margin-top','30px');
+            } else if(danId % 3 == 2){
+                $('#' + danIdNow).css('margin-top','60px');
+            }
+            if(video[0].paused || video[0].ended){
+                $('.video-dan-all').css('animation-play-state','paused');
+            } else {
+                $('.video-dan-all').css('animation-play-state','running');
+            }
+
+            $('.video-dan-all').on('animationend', function () {
+                this.remove();
+            });
+            danId += 1;
+            $('#' + danIdNow).text(danText);
+            $('.video-dan-input').val("");
+        }
+
+    }
+    function toFull() {
+        $('header').addClass('full');
+        $('video').addClass('full');
+        $('.video-dan').addClass('video-dan-full');
+        $('.video-dan-input').addClass('video-dan-input-full');
+        $('.yinyin').addClass('yinyin-a');
+    }
+    function outFull() {
+        clearTimeout(timer);
+        $('video').removeClass('full');
+        $('header').removeClass('full');
+        $('.yinyin').removeClass('yinyin-a');
+        $('.yinyin').removeClass('yinyin-off').addClass('yinyin-on');
+        $('.player-list').removeClass('player-list-off').addClass('player-list-on');
+        $('#my-video').attr('style', 'cursor:pointer');
+        $('.video-dan').removeClass('video-dan-full');
+        $('.video-dan-input').removeClass('video-dan-input-full');
+    }
     //全屏
     function launchFullScreen() {
         if (!full || !hidding){
@@ -250,9 +293,7 @@
                 } else if (element.msRequestFullscreen) {
                     element.msRequestFullscreen();
                 }
-                $('header').addClass('full');
-                $('video').addClass('full');
-                $('.yinyin').addClass('yinyin-a');
+               toFull();
             }else {
                 if (document.exitFullscreen) {
                     document.exitFullscreen();
@@ -273,51 +314,28 @@
     document.addEventListener("fullscreenchange", function(e) {
         full = !full;
         if (!full){
-            clearTimeout(timer);
-            $('video').removeClass('full');
-            $('header').removeClass('full');
-            $('.yinyin').removeClass('yinyin-a');
-            $('.yinyin').removeClass('yinyin-off').addClass('yinyin-on');
-            $('.player-list').removeClass('player-list-off').addClass('player-list-on');
-            $('#my-video').attr('style', 'cursor:pointer');
+            outFull();
         }
     });
     document.addEventListener("mozfullscreenchange", function(e) {
         full = !full;
         if (!full){
-            clearTimeout(timer);
-            $('video').removeClass('full');
-            $('header').removeClass('full');
-            $('.yinyin').removeClass('yinyin-a');
-            $('.yinyin').removeClass('yinyin-off').addClass('yinyin-on');
-            $('.player-list').removeClass('player-list-off').addClass('player-list-on');
-            $('#my-video').attr('style', 'cursor:pointer');
+            outFull();
         }
     });
     document.addEventListener("webkitfullscreenchange", function(e) {
         full = !full;
         if (!full){
-            clearTimeout(timer);
-            $('video').removeClass('full');
-            $('header').removeClass('full');
-            $('.yinyin').removeClass('yinyin-a');
-            $('#my-video').attr('style', 'cursor:pointer');
-            $('.yinyin').removeClass('yinyin-off').addClass('yinyin-on');
-            $('.player-list').removeClass('player-list-off').addClass('player-list-on');
+            outFull();
         }
     });
     document.addEventListener("MSFullscreenChange", function(e) {
         full = !full;
         if (!full){
-            clearTimeout(timer);
-            $('video').removeClass('full');
-            $('header').removeClass('full');
-            $('.yinyin').removeClass('yinyin-a');
-            $('#my-video').attr('style', 'cursor:pointer');
-            $('.yinyin').removeClass('yinyin-off').addClass('yinyin-on');
-            $('.player-list').removeClass('player-list-off').addClass('player-list-on');
+           outFull();
         }
     });
+
     updateVolume(0, 0.9);  // 初始化声音
     video.on("loadedmetadata", function(){
         if (qieh == 0){
@@ -341,10 +359,10 @@
             isOn = true;
         });
         $('body').on('mousedown', function (e) {
-            e.preventDefault();
+            // e.preventDefault();
         }).on('mousemove', function () {
             fillShow();
-        })
+        });
         $('.play-one').on('click', function () {
             playAndPause();
         });
@@ -377,14 +395,27 @@
         });
         $('#soundBtn').on('click',soundAndMute);
         $(window).keypress(function(e) {
-            if (e.keyCode == 0 || e.keyCode == 32) {
-                playAndPause();
+            var isFocus = $(".video-dan-input").is(":focus");
+            var isControl = $('.yinyin').hasClass('yinyin-off');
+            if (e.keyCode == 0 || e.keyCode == 32){
+                if(!isFocus || isControl){
+                    playAndPause();
+                }
             }
+            if (e.keyCode == 13){
+                if(isFocus){
+                    danOn();
+                }
+            }
+
         });
         $('#loop').on('click', isloop);
         video.on('click', function () {
             playAndPause();
         });
+        $('.video-dan-btn').on('click', function () {
+            danOn();
+        })
     });
     video.on('timeupdate', function() {
         var currentTime = video[0].currentTime;
@@ -409,6 +440,18 @@
                 $('.player-list-video').eq(i).removeClass('video-now');
             }
             $('.player-list-video').eq(videoProp).addClass('video-now');
+            qiehuan();
+            qieh = 0;
+        }
+    });
+    $('.player-list-video').on('click', function () {
+        if (!full || !hidding){
+            videoProp = $(this).index();
+            videoIndex = videoListAll[$(this).index()];
+            for(var i =0; i < videoList; i++){
+                $('.player-list-video').eq(i).removeClass('video-now');
+            }
+            $(this).addClass('video-now');
             qiehuan();
             qieh = 0;
         }

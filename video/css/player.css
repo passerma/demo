@@ -2,6 +2,7 @@
     margin: 0;
     padding: 0;
     border: none;
+    font-family: 微软雅黑;
 }
 html, body{
     width: 100%;
@@ -14,6 +15,7 @@ header{
     margin: 0 auto;
     text-align: center;
     transition: all .5s;
+    overflow: hidden;
 }
 video{
     position: relative;
@@ -87,6 +89,72 @@ video{
     color: white;
     margin-left: 10px;
     z-index: 2;
+}
+.video-dan{
+    position: absolute;
+    margin-left: 230px;
+    margin-top: -1px;
+    z-index: 10;
+    transition: all .5s;
+}
+.video-dan-input{
+    height: 25px;
+    background: whitesmoke;
+    line-height: 25px;
+    width: 200px;
+    float: left;
+    border-right: 1px solid cadetblue;
+    border-bottom-left-radius: 5px;
+    border-top-left-radius: 5px;
+    outline: none;
+    text-indent: 2px;
+}
+.video-dan-btn{
+    display: inline-block;
+    height: 25px;
+    font-size: 15px;
+    width: 50px;
+    text-align: center;
+    line-height: 25px;
+    float: left;
+    color: #454545;
+    font-weight: bold;
+    background: whitesmoke;
+    border-bottom-right-radius: 5px;
+    border-top-right-radius: 5px;
+    cursor: pointer;
+}
+.video-dan-value{
+    position: absolute;
+    z-index: 20;
+    color: white;
+    font-size: 25px;
+    font-weight: bold;
+    white-space:nowrap;
+    animation: danOnFull 7s linear;
+}
+.video-dan-value-full{
+    position: absolute;
+    z-index: 20;
+    color: white;
+    font-size: 25px;
+    font-weight: bold;
+    white-space:nowrap;
+    animation: danOnFull 10s linear;
+}
+@keyframes danOn {
+    from {left: 100%; transform: translateX(0)}
+    to {left: 0; transform: translateX(-100%)}
+}
+@keyframes danOnFull {
+    from {left: 100%; transform: translateX(0)}
+    to {left: 0; transform: translateX(-100%)}
+}
+.video-dan-input-full{
+    width: 300px;
+}
+.video-dan-full{
+    margin-left: calc(50% - 175px);
 }
 .right-bottom{
     float: right;
