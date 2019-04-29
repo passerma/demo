@@ -1,30 +1,34 @@
 (function($) {
     var video = $("#my-video");
-    var loop = 0;
+    var loop = false;
     var qieh = 1;
-    var loopture = 0;
     var videoIndex = 0;
+    var videoProp = 0;
     var ddd = document.getElementById('video-div');
     var full = false;
     var timer;
     var hidding = false;
     var isOn = true;
-    var videoList = $('.player-list-video').length;
-    var videoProp = 0;
+    var videoListLen = $('.player-list-video').length;
     var videoSpeed = 1;
-    var videoListAll = new Array('https://blz-videos.nosdn.127.net/1/StarCraft/SC2_Warchest_Season4_zhCN.mp4', 'https://xz.v.netease.com/2018/0929/d609831f1bb5f1956c8a0e4cd30055caqt.mp4',
-        'https://blz-videos.nosdn.127.net/1/HearthStone/Developer+Insights+-+Season+of+Rastakhan_CN_v2.mp4', 'https://blz-videos.nosdn.127.net/1/Heroes/HOS_ResistanceSkinsTrailer_zhCN.mp4',
-        'http://flv.bn.netease.com/videolib3/1407/13/kzJvC0877/SD/kzJvC0877-mobile.mp4', 'https://blz-videos.nosdn.127.net/1/WoWx8_8.1Season2SurvivalGuide_vFINAL_zhCN.mp4',
-        'https://crazynote.v.netease.com/2019/0121/1923fcb84b9d6df4dafaebde746ba607qt.mp4', 'https://n.v.netease.com/2017/1212_erce/nsh_hnc_final_info_hd.mp4',
-        'https://yys.v.netease.com/2018/0917/63ec503dfa48f5196d35ebd6eb2c7761qt.mp4');
+    var videoListAll = new Array('https://blz-videos.nosdn.127.net/1/HearthStone/f6cd63b590d416821d3e27e0.mp4',
+        'http://hd.yinyuetai.com/uploads/videos/common/EB170169C381ACA65BDFA873976313F3.mp4',
+        'http://hc.yinyuetai.com/uploads/videos/common/FA6B0169A324DD75A87E1C84F4B31399.mp4',
+        'http://hc.yinyuetai.com/uploads/videos/common/7AD001644D9382E54FD583466B66EAC8.mp4',
+        'http://hd.yinyuetai.com/uploads/videos/common/BB87016532900E3929D35E14BF2C6C40.mp4',
+        'http://hc.yinyuetai.com/uploads/videos/common/12D80162AA2DB6AAF891A9F4591D3829.mp4',
+        'http://hc.yinyuetai.com/uploads/videos/common/F7580167115F337E6ECB7448886C5700.mp4',
+        'http://hd.yinyuetai.com/uploads/videos/common/FDB801694C7FC529294DB399983B4356.mp4',
+        'http://hc.yinyuetai.com/uploads/videos/common/4454016540FBBFE757F1EBA66259FAEF.mp4');
     var danId = 0;
-
+    var clickFlag = null;
+    var vedioError = null;
     function qiehuan(){
-        video.prop("src",videoIndex);
-        $('.timeBar').css('width', 0);
+        video[0].src = videoListAll[videoIndex];
+        $('.psVideo-timeBar').css('width', 0);
         video[0].play();
-        $('.play-btn').removeClass('stop').addClass('play');
-        $('.play-one').hide();
+        $('.psVideo-play-btn').removeClass('psVideo-stop').addClass('psVideo-play');
+        $('.psVideo-play-one').hide();
     }
     // 读取初始时间
     function timeFormat(seconds) {
@@ -41,7 +45,7 @@
     //更新时间进度条
     function updateProgress(x){
         if (!full || !hidding){
-            var progress = $('.progress');
+            var progress = $('.psVideo-progress');
             var position = x - progress.offset().left;
             var percentage = 100 * position / progress.width();
             if(percentage > 100) {
@@ -50,7 +54,7 @@
             if(percentage < 0) {
                 percentage = 0;
             }
-            $('.timeBar').css('width', percentage+'%');
+            $('.psVideo-timeBar').css('width', percentage+'%');
             video[0].currentTime = video[0].duration * percentage / 100;
         }
     }
@@ -58,7 +62,7 @@
     function enableProgressDrag() {
         if (!full || !hidding){
             var progressDrag = false;
-            $('.progress').on('mousedown', function(e) {
+            $('.psVideo-progress').on('mousedown', function(e) {
                 progressDrag = true;
                 updateProgress(e.pageX);
             });
@@ -78,10 +82,10 @@
     // 控制栏展示消失
     function showControl(shouldShow) {
         if(shouldShow) {
-            $('.yinyin').removeClass('yinyin-off').addClass('yinyin-on');
+            $('.psVideo-shade').removeClass('psVideo-shade-off').addClass('psVideo-shade-on');
             $('.player-list').removeClass('player-list-off').addClass('player-list-on');
         } else {
-            $('.yinyin').removeClass('yinyin-on').addClass('yinyin-off');
+            $('.psVideo-shade').removeClass('psVideo-shade-on').addClass('psVideo-shade-off');
             $('.player-list').removeClass('player-list-on').addClass('player-list-off');
         }
     }
@@ -89,27 +93,26 @@
         if (full){
             if(hidding){
                 hidding = false;
-                return;
             }
             if (timer) {
                 clearTimeout(timer);
-                timer = 0;
+                timer = null;
             }
-            $('.yinyin').removeClass('yinyin-off').addClass('yinyin-on');
+            $('.psVideo-shade').removeClass('psVideo-shade-off').addClass('psVideo-shade-on');
             $('.player-list').removeClass('player-list-off').addClass('player-list-on');
-            $('#my-video').attr('style', 'cursor:pointer');
+            video.attr('style', 'cursor:pointer');
             if (isOn){
                 timer = setTimeout(function () {
                     hidding = true;
-                    $('.yinyin').removeClass('yinyin-on').addClass('yinyin-off');
+                    $('.psVideo-shade').removeClass('psVideo-shade-on').addClass('psVideo-shade-off');
                     $('.player-list').removeClass('player-list-on').addClass('player-list-off');
-                    $('#my-video').attr('style', 'cursor:none');
+                    video.attr('style', 'cursor:none');
                 }, 2000)
             }
         }
     }
     //声音按钮
-    var soundAndMute = function() {
+    function soundAndMute() {
         if (!full || !hidding){
             if(video[0].muted) {
                 video[0].muted = false;
@@ -180,16 +183,16 @@
     function playAndPause() {
             if(video[0].paused || video[0].ended) {
                 video[0].play();
-                $('.play-btn').removeClass('stop').addClass('play');
-                $('.play-one').hide();
+                $('.psVideo-play-btn').removeClass('psVideo-stop').addClass('psVideo-play');
+                $('.psVideo-play-one').hide();
                 playSpeed(videoSpeed);
-                $('.video-dan-all').css('animation-play-state','running');
+                $('.psVideo-dan-all').css('animation-play-state','running');
             }
             else {
                 video[0].pause();
-                $('.play-btn').removeClass('play').addClass('stop');
-                $('.play-one').show();
-                $('.video-dan-all').css('animation-play-state','paused');
+                $('.psVideo-play-btn').removeClass('psVideo-play').addClass('psVideo-stop');
+                $('.psVideo-play-one').show();
+                $('.psVideo-dan-all').css('animation-play-state','paused');
             }
     }
     //播放速度
@@ -217,67 +220,107 @@
     //循环播放
     function isloop() {
         if (!full || !hidding){
-            if(loop == 0){
+            if(!loop){
                 $('#loop').removeClass('loop').addClass('loop-ture');
                 video[0].loop = true;
-                loop = 1;
-            } else if(loop == 1){
+                loop = !loop;
+            } else{
                 $('#loop').removeClass('loop-ture').addClass('loop');
                 video[0].loop = false;
-                loop = 0;
+                loop = !loop;
             }
         }
     }
 
     function danOn() {
-        var danText = $('.video-dan-input').val();
+        var danText = $('.psVideo-dan-input').val();
         var zz = "^[ ]+$";               //正则判断是否全是空格
         var isK = new RegExp(zz);
         if (danText && !(isK.test(danText))){
             var danIdNow = 'dan' + danId;
             if (full){
-                var danDom = "<span class='video-dan-all video-dan-value-full' id='" + danIdNow + "'</span>";
+                var danDom = "<span class='psVideo-dan-all psVideo-dan-value-full' id='" + danIdNow + "'</span>";
             } else {
-                var danDom = "<span class='video-dan-all video-dan-value' id='" + danIdNow + "'</span>";
+                var danDom = "<span class='psVideo-dan-all psVideo-dan-value' id='" + danIdNow + "'</span>";
             }
-            $('header').prepend(danDom);
+            $('.psVideo').prepend(danDom);
             if(danId %3 == 1){
                 $('#' + danIdNow).css('margin-top','30px');
             } else if(danId % 3 == 2){
                 $('#' + danIdNow).css('margin-top','60px');
             }
             if(video[0].paused || video[0].ended){
-                $('.video-dan-all').css('animation-play-state','paused');
+                $('.psVideo-dan-all').css('animation-play-state','paused');
             } else {
-                $('.video-dan-all').css('animation-play-state','running');
+                $('.psVideo-dan-all').css('animation-play-state','running');
             }
-
-            $('.video-dan-all').on('animationend', function () {
-                this.remove();
+            $('.psVideo-dan-all').on('animationend', function () {
+                $('#'+ this.id).remove();
             });
             danId += 1;
             $('#' + danIdNow).text(danText);
-            $('.video-dan-input').val("");
+            $('.psVideo-dan-input').val("");
         }
 
     }
     function toFull() {
-        $('header').addClass('full');
-        $('video').addClass('full');
-        $('.video-dan').addClass('video-dan-full');
-        $('.video-dan-input').addClass('video-dan-input-full');
-        $('.yinyin').addClass('yinyin-a');
+        $('.psVideo').addClass('full');
+        video.addClass('full');
+        $('.psVideo-dan').addClass('psVideo-dan-full');
+        $('.psVideo-dan-input').addClass('psVideo-dan-input-full');
+        $('.psVideo-shade').addClass('psVideo-shade-full');
+        timer = setTimeout(function () {
+            hidding = true;
+            $('.psVideo-shade').removeClass('psVideo-shade-on').addClass('psVideo-shade-off');
+            $('.player-list').removeClass('player-list-on').addClass('player-list-off');
+            video.attr('style', 'cursor:none');
+        }, 2000)
     }
     function outFull() {
         clearTimeout(timer);
-        $('video').removeClass('full');
-        $('header').removeClass('full');
-        $('.yinyin').removeClass('yinyin-a');
-        $('.yinyin').removeClass('yinyin-off').addClass('yinyin-on');
+        video.removeClass('full');
+        $('.psVideo').removeClass('full');
+        $('.psVideo-shade').removeClass('psVideo-shade-full');
+        $('.psVideo-shade').removeClass('psVideo-shade-off').addClass('psVideo-shade-on');
         $('.player-list').removeClass('player-list-off').addClass('player-list-on');
-        $('#my-video').attr('style', 'cursor:pointer');
-        $('.video-dan').removeClass('video-dan-full');
-        $('.video-dan-input').removeClass('video-dan-input-full');
+        video.attr('style', 'cursor:pointer');
+        $('.psVideo-dan').removeClass('psVideo-dan-full');
+        $('.psVideo-dan-input').removeClass('psVideo-dan-input-full');
+    }
+    //全屏
+    function doOnClick() {
+        if(clickFlag) {
+            clickFlag = clearTimeout(clickFlag);
+        }
+        clickFlag = setTimeout(function() {
+            playAndPause();
+        }, 300);
+    }
+    function doOnDblClick() {
+        if(clickFlag) {
+            clickFlag = clearTimeout(clickFlag);
+        }
+        launchFullScreen();
+    }
+    function keyTime(key){
+        if (key == 39){
+            var keyCurrentTime = video[0].currentTime + 10;
+            var keyDuration = video[0].duration;
+            var keyPercent = 100 * keyCurrentTime / keyDuration;
+            $('.psVideo-timeBar').css('width', keyPercent + '%');
+            $('#currentTime').text(timeFormat(keyCurrentTime));
+            video[0].currentTime = keyCurrentTime;
+        }
+        if (key == 37){
+            console.log(video[0].currentTime);
+            var keyCurrentTime = video[0].currentTime - 10;
+            console.log(keyCurrentTime);
+            var keyDuration = video[0].duration;
+            var keyPercent = 100 * keyCurrentTime / keyDuration;
+            $('.psVideo-timeBar').css('width', keyPercent + '%');
+            $('#currentTime').text(timeFormat(keyCurrentTime));
+            video[0].currentTime = keyCurrentTime;
+        }
     }
     //全屏
     function launchFullScreen() {
@@ -293,7 +336,6 @@
                 } else if (element.msRequestFullscreen) {
                     element.msRequestFullscreen();
                 }
-               toFull();
             }else {
                 if (document.exitFullscreen) {
                     document.exitFullscreen();
@@ -312,148 +354,159 @@
     }
     //监听退出全屏事件
     document.addEventListener("fullscreenchange", function(e) {
-        full = !full;
         if (!full){
+            toFull();
+        } else {
             outFull();
         }
+        full = !full;
     });
     document.addEventListener("mozfullscreenchange", function(e) {
-        full = !full;
         if (!full){
+            toFull();
+        } else {
             outFull();
         }
+        full = !full;
     });
     document.addEventListener("webkitfullscreenchange", function(e) {
-        full = !full;
         if (!full){
+            toFull();
+        } else {
             outFull();
         }
+        full = !full;
     });
     document.addEventListener("MSFullscreenChange", function(e) {
-        full = !full;
         if (!full){
-           outFull();
+            toFull();
+        } else {
+            outFull();
         }
+        full = !full;
     });
 
     updateVolume(0, 0.9);  // 初始化声音
     video.on("loadedmetadata", function(){
-        if (qieh == 0){
-            qiehuan();
-            qieh = 1;
-        }
-        $('header').hover(function() {
-            showControl(true);
-        }, function() {
-            showControl(false);
-        });
-        // 判断鼠标是否在控制区，进入和出去改变isOn值，来触发是否开启延时函数
-        $('.yinyin').hover(function() {
-            isOn = false;
-        }, function() {
-            isOn = true;
-        });
-        $('.player-list').hover(function() {
-            isOn = false;
-        }, function() {
-            isOn = true;
-        });
-        $('body').on('mousedown', function (e) {
-            // e.preventDefault();
-        }).on('mousemove', function () {
-            fillShow();
-        });
-        $('.play-one').on('click', function () {
-            playAndPause();
-        });
-        $('.play-btn').on('click', function () {
-            if (!full || !hidding){
-                playAndPause();
-            }
-        });
-        $('.all').on('click', launchFullScreen);
         $('#currentTime').text(timeFormat(0));
         $('#duration').text(timeFormat(video[0].duration));
         enableProgressDrag();
         enableSoundDrag();
         playSpeed(videoSpeed);
-        $('#speed1Btn').on('click', function() {
-            playSpeed(1);
-        });
-        $('#speed2Btn').on('click', function() {
-            playSpeed(2);
-        });
-        $('#speed05Btn').on('click', function() {
-            playSpeed(0.5);
-        });
-        //  阻止事件冒泡
-        $('.sound-list').bind("click",function(event){
-            event.stopPropagation();
-        });
-        $('.konge').bind("click",function(event){
-            event.stopPropagation();
-        });
-        $('#soundBtn').on('click',soundAndMute);
-        $(window).keypress(function(e) {
-            var isFocus = $(".video-dan-input").is(":focus");
-            var isControl = $('.yinyin').hasClass('yinyin-off');
-            if (e.keyCode == 0 || e.keyCode == 32){
-                if(!isFocus || isControl){
-                    playAndPause();
-                }
-            }
-            if (e.keyCode == 13){
-                if(isFocus){
-                    danOn();
-                }
-            }
-
-        });
-        $('#loop').on('click', isloop);
-        video.on('click', function () {
-            playAndPause();
-        });
-        $('.video-dan-btn').on('click', function () {
-            danOn();
-        })
     });
     video.on('timeupdate', function() {
         var currentTime = video[0].currentTime;
         var duration = video[0].duration;
         var percent = 100 * currentTime / duration;
-        $('.timeBar').css('width', percent + '%');
+        $('.psVideo-timeBar').css('width', percent + '%');
         $('#currentTime').text(timeFormat(currentTime));
     });
     video.on('canplay', function() {
-        $('.loading').fadeOut(100);
+        $('.psVideo-loading').fadeOut(100);
+    });
+    video.on('waiting', function() {
+        $('.psVideo-loading').fadeIn(100);
     });
     video.on('ended', function() {
-        $('.play-btn').removeClass("play").addClass("stop"); // 列表切换
-        if(loopture == 0){
-            videoProp += 1;
-            videoIndex = videoListAll[videoProp];
-            if(videoProp == videoList){
-                videoProp = 0;
-                videoIndex = videoListAll[videoProp];
-            }
-            for(var i =0; i < videoList; i++){
-                $('.player-list-video').eq(i).removeClass('video-now');
-            }
-            $('.player-list-video').eq(videoProp).addClass('video-now');
-            qiehuan();
-            qieh = 0;
+        if (!loop){
+            videoIndex += 1;
         }
+        if(videoIndex == videoListLen){
+            videoIndex = 0;
+        }
+        for(var i =0; i < videoListLen; i++){
+            $('.player-list-video').eq(i).removeClass('video-now');
+        }
+        $('.player-list-video').eq(videoIndex).addClass('video-now');
+        qiehuan();
+
+    });
+
+    $('.psVideo').hover(function() {
+        showControl(true);
+    }, function() {
+        showControl(false);
+    });
+    // 判断鼠标是否在控制区，进入和出去改变isOn值，来触发是否开启延时函数
+    $('.psVideo-shade').hover(function() {
+        isOn = false;
+    }, function() {
+        isOn = true;
+    });
+    $('.player-list').hover(function() {
+        isOn = false;
+    }, function() {
+        isOn = true;
+    });
+    $('body').on('mousemove', function () {
+        fillShow();
+    });
+    $('.psVideo-play-one').on('click', function () {
+        playAndPause();
+    });
+    $('.psVideo-play-btn').on('click', function () {
+        if (!full || !hidding){
+            playAndPause();
+        }
+    });
+    $('.all').on('click', launchFullScreen);
+    $('#currentTime').text(timeFormat(0));
+    $('#duration').text(timeFormat(video[0].duration));
+    enableProgressDrag();
+    enableSoundDrag();
+    playSpeed(videoSpeed);
+    $('#speed1Btn').on('click', function() {
+        playSpeed(1);
+    });
+    $('#speed2Btn').on('click', function() {
+        playSpeed(2);
+    });
+    $('#speed05Btn').on('click', function() {
+        playSpeed(0.5);
+    });
+    //  阻止事件冒泡
+    $('.sound-list').bind("click",function(event){
+        event.stopPropagation();
+    });
+    $('.konge').bind("click",function(event){
+        event.stopPropagation();
+    });
+    $('#soundBtn').on('click',soundAndMute);
+    $('#loop').on('click', isloop);
+    video.on('click', function () {
+        doOnClick();
+    });
+    video.on('dblclick', function () {
+        doOnDblClick();
+    });
+    $('.psVideo-dan-btn').on('click', function () {
+        danOn();
+    });
+    $(window).keypress(function(e) {
+        var isFocus = $(".psVideo-dan-input").is(":focus");
+        var isControl = $('.psVideo-shade').hasClass('psVideo-shade-off');
+        if (e.keyCode == 0 || e.keyCode == 32){
+            if(!isFocus || isControl){
+                playAndPause();
+            }
+        }
+        if (e.keyCode == 13){
+            if(isFocus){
+                danOn();
+            }
+        }
+    });
+    $(window).keydown(function(e) {
+        keyTime(e.keyCode);
     });
     $('.player-list-video').on('click', function () {
         if (!full || !hidding){
-            videoProp = $(this).index();
-            videoIndex = videoListAll[$(this).index()];
-            for(var i =0; i < videoList; i++){
+            videoIndex = $(this).index();
+            for(var i =0; i < videoListLen; i++){
                 $('.player-list-video').eq(i).removeClass('video-now');
             }
             $(this).addClass('video-now');
             qiehuan();
-            qieh = 0;
         }
     });
 })(jQuery);

@@ -9,15 +9,15 @@ html, body{
     height: 100%;
     overflow: hidden;
 }
-header{
+.psVideo{
     width: 800px;
     position: relative;
-    margin: 0 auto;
+    margin: 20px auto;
     text-align: center;
     transition: all .5s;
     overflow: hidden;
 }
-video{
+.my-psVideo{
     position: relative;
     margin: 0 auto;
     width: 800px;
@@ -27,11 +27,12 @@ video{
     background: black;
 }
 .full{
+    margin: 0 auto;
     width: 100%;
     height: 100%;
     background: black;
 }
-.play-one{
+.psVideo-play-one{
     width: 70px;
     height: 70px;
     background: url("../player/playone.png") no-repeat;
@@ -42,13 +43,13 @@ video{
     right: 60px;
     cursor: pointer;
 }
-.play-footer{
+.psVideo-play-footer{
     position: absolute;
     width: 100%;
     height: 36px;
     bottom: 0;
 }
-.yinyin{
+.psVideo-shade{
     position: absolute;
     height: 60px;
     width: 100%;
@@ -56,16 +57,16 @@ video{
     background:linear-gradient(rgba(0,0,0,0),rgba(0,0,0,0.6));
     transition: opacity .3s;
 }
-.yinyin-a{
+.psVideo-shade-full{
     bottom: 0;
 }
-.yinyin-on{
+.psVideo-shade-on{
     opacity: 1;
 }
-.yinyin-off{
+.psVideo-shade-off{
     opacity: 0;
 }
-.play-footer .play-btn{
+.psVideo-play-footer .psVideo-play-btn{
     width: 23px;
     height: 23px;
     float: left;
@@ -73,16 +74,16 @@ video{
     cursor: pointer;
     z-index: 3;
 }
-.stop{
+.psVideo-stop{
     background: url("../player/stop.png") no-repeat;
     background-size:cover;
 }
-.play{
+.psVideo-play{
     background: url("../player/play.png") no-repeat;
     background-size:cover;
 }
 
-.time{
+.psVideo-time{
     float: left;
     font-size: 15px;
     line-height: 23px;
@@ -90,16 +91,16 @@ video{
     margin-left: 10px;
     z-index: 2;
 }
-.video-dan{
+.psVideo-dan{
     position: absolute;
     margin-left: 230px;
     margin-top: -1px;
     z-index: 10;
     transition: all .5s;
 }
-.video-dan-input{
+.psVideo-dan-input{
     height: 25px;
-    background: whitesmoke;
+    background: rgba(245, 245, 245, .8);
     line-height: 25px;
     width: 200px;
     float: left;
@@ -109,7 +110,7 @@ video{
     outline: none;
     text-indent: 2px;
 }
-.video-dan-btn{
+.psVideo-dan-btn{
     display: inline-block;
     height: 25px;
     font-size: 15px;
@@ -119,12 +120,12 @@ video{
     float: left;
     color: #454545;
     font-weight: bold;
-    background: whitesmoke;
+    background: rgba(245, 245, 245, .9);
     border-bottom-right-radius: 5px;
     border-top-right-radius: 5px;
     cursor: pointer;
 }
-.video-dan-value{
+.psVideo-dan-value{
     position: absolute;
     z-index: 20;
     color: white;
@@ -132,8 +133,9 @@ video{
     font-weight: bold;
     white-space:nowrap;
     animation: danOnFull 7s linear;
+    transform: translateX(-100%);
 }
-.video-dan-value-full{
+.psVideo-dan-value-full{
     position: absolute;
     z-index: 20;
     color: white;
@@ -141,6 +143,7 @@ video{
     font-weight: bold;
     white-space:nowrap;
     animation: danOnFull 10s linear;
+    transform: translateX(-100%);
 }
 @keyframes danOn {
     from {left: 100%; transform: translateX(0)}
@@ -150,18 +153,18 @@ video{
     from {left: 100%; transform: translateX(0)}
     to {left: 0; transform: translateX(-100%)}
 }
-.video-dan-input-full{
+.psVideo-dan-input-full{
     width: 300px;
 }
-.video-dan-full{
+.psVideo-dan-full{
     margin-left: calc(50% - 175px);
 }
-.right-bottom{
+.psVideo-right-btn{
     float: right;
     margin-right: 3%;
     z-index: 4;
 }
-.bottom{
+.psVideo-btn{
     width: 23px;
     height: 23px;
     float: right;
@@ -252,7 +255,7 @@ video{
     background: url("../player/jinyin.png") no-repeat;
     background-size:cover;
 }
-.progress{
+.psVideo-progress{
     width: 95%;
     background: white;
     height: 2px;
@@ -263,11 +266,11 @@ video{
     transition: bottom 0.1s;
     border-radius: 3px;
 }
-.progress:hover{
+.psVideo-progress:hover{
     height: 6px;
     bottom: 48px;
 }
-.progress .timeBar {
+.psVideo-progress .psVideo-timeBar {
     height: 100%;
     position: absolute;
     top: 0;
@@ -419,30 +422,57 @@ footer{
     margin-top: 10px;
     top: 0;
 }
-@font-face {
-    font-family: 'webfont';
-    src: url('../source/webfont.eot');
-    src: url('../source/webfont.eot?#iefix') format('embedded-opentype'),
-    url('../source/webfont.woff') format('woff'),
-    url('../source/webfont.ttf') format('truetype'),
-    url('../source/webfont.svg#webfont') format('svg');
+.psVideo-loading{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-top: -30px;
+    margin-left: -35px;
+    width: 70px;
+    height: 60px;
+    z-index: 30;
 }
-.web-font {
-    font-family: "webfont" !important;
-    font-size: 20px;
-    font-style: normal;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-}
-.wrap{
-    margin-top: 10px;
-    color: #acacac;
-    text-align: center;
-}
-.wrap a{
-    font-family: 微软雅黑;
-    text-decoration: none;
+.psVideo-loading span{
     display: inline-block;
-    color: #aaaaaa;
-    margin: 0 25px;
+    width: 10px;
+    height: 0;
+    position: absolute;
+    background: rgba(96, 191, 242, 0.53);
+    top: 50%;
+    margin-top: 0;
+    left: 0;
+}
+.psVideo-loading span:nth-child(1){
+    animation: span1 1s linear infinite;
+}
+.psVideo-loading span:nth-child(2){
+    height: 30px;
+    top: 50%;
+    margin-top: -15px;
+    margin-left: 20px;
+    animation: span2 1s linear infinite;
+}
+.psVideo-loading span:nth-child(3){
+    height: 60px;
+    top: 50%;
+    margin-top: -30px;
+    margin-left: 40px;
+    animation: span3 1s linear infinite;
+}
+@keyframes span1 {
+    0%{height: 0; margin-top: 0}
+    50%{height: 50px; margin-top: -25px}
+    100%{height: 0; margin-top: 0}
+}
+@keyframes span2 {
+    0%{height: 30px; margin-top: -15px}
+    25%{height: 60px; margin-top: -30px}
+    50%{height: 30px; margin-top: -15px}
+    75%{height: 0; margin-top: 0}
+    100%{height: 30px; margin-top: -15px}
+}
+@keyframes span3 {
+    0%{height: 60px; margin-top: -30px}
+    50%{height: 0; margin-top: 0}
+    100%{height: 60px; margin-top: -30px}
 }
