@@ -18,6 +18,9 @@
             span.appendChild(document.createTextNode(innerText));
             $('.audio-play-list-all').append(span);
         }
+        var addSonBtn = document.createElement('span');
+        addSonBtn.className = 'addSonBtn';
+        $('.audio-play-list-all').append(addSonBtn);
         $('.play-list-all').eq(0).addClass('play-list-all-now');
         var audio = document.getElementById('audio-my');
         var audioPlay = false;
@@ -27,8 +30,7 @@
             if(obj.audioLic[i]){
                 audioLicSongLic.push(obj.audioLic[i]);
             } else {
-                var audioSongLicNone = '[00:00.0]未找到歌词';
-                audioLicSongLic.push(audioSongLicNone);
+                audioLicSongLic.push('[00:00.0]未找到歌词');
             }
         }
         var audioLic1 = audioLicSongLic[0].split('[');
@@ -62,7 +64,7 @@
             audio.src = audioSrcName + audioName[0] + '.mp3';
         }
         $('.audio-img-cover').css({
-            'background': 'url(' + audioSrcName + audioText[1] + '.jpg)' + ' no-repeat center',
+            'background': 'url(' + audioSrcName + audioName[0] + '.jpg)' + ' no-repeat center',
             'background-size': '40px 40px',
         });
         function drawAudioArc() {
@@ -197,12 +199,12 @@
             }
             if(audioMax){
                 $('.audio-img-cover').css({
-                    'background': 'url(' + audioSrcName + audioText[1] + '.jpg)' + ' no-repeat center',
+                    'background': 'url(' + audioSrcName + audioName[audioIndex] + '.jpg)' + ' no-repeat center',
                     'background-size': '90px 90px',
                 });
             } else {
                 $('.audio-img-cover').css({
-                    'background': 'url(' + audioSrcName + audioText[1] + '.jpg)' + ' no-repeat center',
+                    'background': 'url(' + audioSrcName + audioName[audioIndex] + '.jpg)' + ' no-repeat center',
                     'background-size': '40px 40px',
                 });
             }
@@ -350,6 +352,54 @@
                 audioLoop = !audioLoop;
             }
         }
+        function addSong() {
+            var hasSong = false;
+            $.ajax({
+                url: "Javascript/addsong.json",
+                type: "GET",
+                dataType: "json",
+                success: function(data) {
+                    $.each(data, function(e, item) {
+                        if(audioName.includes(item.title)){
+                            return true;
+                        } else {
+                            if(obj.audioHttp){
+                                obj.audioHttp.push(item.audioHttp);
+                            }
+                            audioName.push(item.title);
+                            if(item.src){
+                                audioLicSongLic.push(item.src);
+                            } else {
+                                audioLicSongLic.push('[00:00.0]未找到歌词');
+                            }
+                            var addSongText = new Array();
+                            addSongText = item.title.split('-');
+                            var addSongSpan = document.createElement('span');
+                            addSongSpan.className = 'play-list-all';
+                            addSongSpan.innerText = addSongText[1];
+                            $('.addSonBtn').before(addSongSpan);
+                            $(addSongSpan).on('click', function () {
+                                audioIndex = $(this).index();
+                                listClick = !listClick;
+                                qiehuan();
+                            });
+                            hasSong = true;
+                        }
+                    });
+                    if (obj.addAuto && hasSong){
+                        audioIndex = audioName.length -1;
+                        qiehuan();
+                        if(!audioPlay){
+                            audio.play();
+                            $('.audio-btn-play').removeClass('audio-btn-play-off').addClass('audio-btn-play-on');
+                            $('#audio-img-canvas-play').toggleClass('audio-img-canvas-play-on');
+                            $('#audio-img-canvas').toggleClass('audio-img-canvas-on');
+                            audioPlay = true;
+                        }
+                    }
+                }
+            });
+        }
         drawAudioArc();
         drawAudioPlay();
         updateVolume(0, 0.5);
@@ -382,11 +432,15 @@
             playAudio();
         });
         $('.audio-btn-next').on('click', function () {
-            audioIndex += 1;
+            if(!audioLoop){
+                audioIndex += 1;
+            }
             qiehuan();
         });
         $('.audio-btn-before').on('click', function () {
-            audioIndex -= 1;
+            if(!audioLoop){
+                audioIndex -= 1;
+            }
             qiehuan();
         });
         $('.audio-btn-sound').on('click', function () {
@@ -400,6 +454,9 @@
         });
         $("#audio").mouseleave(function() {
             audioMouseLeave();
-        })
+        });
+        $('.addSonBtn').on('click', function () {
+            addSong();
+        });
     };
 })();

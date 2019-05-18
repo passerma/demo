@@ -74,7 +74,7 @@
     opacity: 1;
     height: 4px;
     margin-top: -4px;
-    background: rgba(244, 234, 255, 0.4);
+    background: rgba(244, 234, 255, 0.6);
     transition: all .5s;
 }
 .min-time-off{
@@ -358,4 +358,15 @@
     height: 16px;
     border-radius: 50%;
     background: rgb(244, 234, 255);
+}
+.addSonBtn{
+    display: inline-block;
+    width: 100%;
+    height: 40px;
+    line-height: 40px;
+    font-size: 15px;
+    text-align: center;
+    color: #845d85;
+    background: url("../image/添加.png") no-repeat center;
+    background-size: 20px 20px;
 }
