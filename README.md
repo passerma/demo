@@ -3,7 +3,7 @@
 # 1
 ## audio
 ### audio为audio音频播放器源码
-#### 演示地址：[HTML5audio音频插件](https://www.azoth.club/demo1)
+#### 演示地址：[HTML5audio音频插件](https://www.azoth.club/demo/audio)
 ## 更新：
 #### 1.增加播放列表，增加歌词实时显示。
 #### 2.增加随机播放功能。
@@ -29,16 +29,21 @@
   })
 </script>
 ```
-##### 该函数可接收一个对象，可以传入以下属性`audioSrcFile, audioHttp, audioSrc, audioLic, audioBg, audioListBg`, 对应传参规则详见目录下的index.html文件。
+##### 该函数可接收一个对象，可以传入一些属性, 对应传参规则详见目录下的index.html文件。
 <br><br><br>
 # 2
 ## video
 ### video为video视频播放器源码
-#### 演示地址：[HTML5video视频插件](https://www.azoth.club/demo2)
+#### 演示地址：[HTML5video视频插件](https://www.azoth.club/demo/video)
 ## 更新：
 #### 1.增加弹幕功能。
 #### 2.增加方向键控制进度条功能。
 #### 3.增加双击进入全屏功能，增加缓冲加载动画。
+<br><br><br>
+# 3
+## sound
+### sound为让人抓狂的音量控制方式源码
+#### 演示地址：[HTML5video视频插件](https://www.azoth.club/demo/sound)
 <br><br><br>
 欢迎大家下载收藏，交流学习。
 
