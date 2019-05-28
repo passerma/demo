@@ -1,0 +1,168 @@
+*{
+    padding: 0;
+    margin: 0;
+    border: none;
+}
+.wrap{
+    width: 50%;
+    height: 400px;
+    float: left;
+}
+.type1{
+    background: aqua;
+    position: relative;
+}
+.type2{
+    background: aquamarine;
+    position: relative;
+}
+.type3{
+    background: aquamarine;
+    position: relative;
+}
+.type1-control{
+    position: absolute;
+    top: 50%;
+    margin-top: -40px;
+    left: 150px;
+    transform-origin: 20px 20px;
+}
+.type1-control-dot1{
+    display: inline-block;
+    position: absolute;
+    width: 40px;
+    box-sizing: border-box;
+    height: 40px;
+    background: blueviolet;
+    border: 2px white solid;
+    border-radius: 50%;
+    z-index: 3;
+}
+.type1-control-mid{
+    display: inline-block;
+    position: absolute;
+    margin-left: 20px;
+    margin-top: 10px;
+    width: 95px;
+    height: 10px;
+    z-index: 1;
+    background: blueviolet;
+}
+.type1-control-mid:before{
+    content: " ";
+    display: inline-block;
+    position: absolute;
+    width: 95px;
+    height: 19px;
+    margin-top: -8px;
+    background: blueviolet;
+    border-top: 3px white solid;
+    z-index: 2;
+    transform: rotateZ(3deg);
+}
+.type1-control-mid:after{
+    content: " ";
+    display: inline-block;
+    position: absolute;
+    width: 95px;
+    height: 23px;
+    margin-top: 2px;
+    background: blueviolet;
+    border-bottom: 3px white solid;
+    z-index: 2;
+    transform: rotateZ(-3deg);
+}
+.type1-control-dot2{
+    display: inline-block;
+    position: absolute;
+    margin-left: 100px;
+    width: 30px;
+    margin-top: 5.5px;
+    box-sizing: border-box;
+    height: 30px;
+    background: blueviolet;
+    border: 2px white solid;
+    border-radius: 50%;
+    z-index: 3;
+    cursor: pointer;
+}
+.type1-sound{
+    position: absolute;
+    top: 50%;
+    margin-top: -90px;
+    left: 350px;
+}
+.type1-sound-text{
+    position: relative;
+    width: 30px;
+    text-align: center;
+}
+.type1-sound-all{
+    position: relative;
+    width: 30px;
+    height: 100px;
+    background: white;
+}
+.type1-sound-now{
+    position: absolute;
+    bottom: 0;
+    width: 30px;
+    height: 50px;
+    background: cadetblue;
+}
+.type2-control{
+    position: absolute;
+    top: 100px;
+    left: 50%;
+}
+.type2-control-dot1{
+    width: 100px;
+    height: 15px;
+    background: blueviolet;
+    box-sizing: border-box;
+    border: 1px solid white;
+    position: absolute;
+    z-index: 3;
+    cursor: pointer;
+}
+.type2-control-dot2{
+    width: 10px;
+    height: 100px;
+    background: blueviolet;
+    box-sizing: border-box;
+    border: 1px solid white;
+    position: absolute;
+    margin-left: 45px;
+    z-index: 2;
+}
+.type2-sound{
+    width: 40px;
+    height: 120px;
+    background: blueviolet;
+    box-sizing: border-box;
+    position: absolute;
+    z-index: 3;
+    left: 50%;
+    margin-top: 180px;
+    margin-left: 30px;
+}
+.type2-sound-text{
+    width: 100%;
+    text-align: center;
+    color: snow;
+    margin-top: 12px;
+}
+.type2-sound-all{
+    width: 30px;
+    height: 80px;
+    margin-left: 5px;
+    position: relative;
+    background: snow;
+}
+.type2-sound-now{
+    position: absolute;
+    bottom: 0;
+    width: 30px;
+    height: 50%;
+    background: chocolate;
+}
