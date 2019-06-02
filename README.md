@@ -43,7 +43,7 @@
 # 3
 ## sound
 ### sound为让人抓狂的音量控制方式源码
-#### 演示地址：[HTML5video视频插件](https://www.azoth.club/demo/sound)
+#### 演示地址：[让人抓狂的音量控制方式插件](https://www.azoth.club/demo/sound)
 <br><br><br>
 欢迎大家下载收藏，交流学习。
 
